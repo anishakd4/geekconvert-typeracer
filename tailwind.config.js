@@ -1,0 +1,26 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        lightGray: "#eeeeee",
+        lighterGray: "#f6fbff",
+        greenA: "#3cc1a3",
+        greenB: "#40a82b",
+        result: "#005995",
+        race: "#3b5998",
+      },
+      keyframes: {
+        cursor: {
+          "0%, 100%": { "border-color": "rgba(0,0,0,1)" },
+          "50%": { "border-color": "rgba(0,0,0,0)" },
+        },
+      },
+      animation: {
+        cursor: "cursor 1s infinite linear",
+      },
+    },
+  },
+  plugins: [],
+};
