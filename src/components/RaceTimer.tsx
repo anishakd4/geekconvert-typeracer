@@ -3,11 +3,13 @@ import { formatTime } from "../utils/formatTime.ts";
 import { useTypingStore } from "../stores/useTypingStore.ts";
 
 const RaceTimer = () => {
-  const [time, setTime] = useState(10);
+  const minimumTypingSpeed = 20;
+  const text = useTypingStore((state) => state.text);
+  const [time, setTime] = useState((text.length / 5 / minimumTypingSpeed) * 60);
 
   useEffect(() => {
     if (time <= 0) {
-      useTypingStore.getState().raceOver();
+      useTypingStore.getState().raceOver("timeout");
       return;
     }
 

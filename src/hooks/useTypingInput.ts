@@ -1,5 +1,5 @@
+import { useTypingStore } from "./../stores/useTypingStore.ts";
 import { useEffect, useMemo, useState } from "react";
-import { useTypingStore } from "../stores/useTypingStore.ts";
 
 type TypingError =
   | {
@@ -62,7 +62,7 @@ const useTypingInput = ({ words }: { words: string[] }) => {
         setIndex((prev) => prev + 1);
         useTypingStore.getState().setCurrentSpeed();
         useTypingStore.getState().setCompletePercentage(100);
-        useTypingStore.getState().raceOver();
+        useTypingStore.getState().raceOver("completed");
         return;
       }
     }
@@ -80,6 +80,7 @@ const useTypingInput = ({ words }: { words: string[] }) => {
 
     if (typed[typedLength - 1] !== currentWord[typedLength - 1]) {
       setError({ state: true, at: typedLength - 1 });
+      useTypingStore.getState().updateMistakeWords(currentWord);
       updateIncorrectMark(totalCharTyped);
       return;
     }
